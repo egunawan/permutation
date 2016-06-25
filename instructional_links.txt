@@ -1,0 +1,6 @@
+http://doc.sagemath.org/html/en/thematic_tutorials/tutorial-objects-and-classes.html
+
+
+./sage -i dot2tex
+
+(above is to use the command view)
