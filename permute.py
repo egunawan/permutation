@@ -75,19 +75,10 @@ class myobj(ClonableArray):
             [0 0 1]
             [0 1 0]
 
-        ::
-
-            sage: p.to_matrix()*q.to_matrix()
-            [0 0 1]
-            [0 1 0]
-            [1 0 0]
 
         """
         p = self[:]
         n = len(p)
-
-        #Build the dictionary of entries since the matrix
-        #is extremely sparse
         entries = {}
         for i in range(n):
             entries[(p[i]-1,i)] = 1
