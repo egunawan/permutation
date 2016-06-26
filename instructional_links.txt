@@ -1,5 +1,7 @@
 http://doc.sagemath.org/html/en/thematic_tutorials/tutorial-objects-and-classes.html
 
+http://www.rafekettler.com/magicmethods.html
+
 
 ./sage -i dot2tex
 

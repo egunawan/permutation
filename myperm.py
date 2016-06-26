@@ -3,9 +3,9 @@ from sage.structure.parent import Parent
 from sage.structure.element import Element
 from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
-from sage.structure.list_clone import ClonableArray
+from sage.structure.list_clone import ClonableIntArray
 
-class MyPerm(ClonableArray):
+class MyPerm(ClonableIntArray):
     """ A permutation is
     """
     __metaclass__ = InheritComparisonClasscallMetaclass
@@ -37,7 +37,7 @@ class MyPerm(ClonableArray):
         """
         #self._line = line
         #self._n = parent._n
-        ClonableArray.__init__(self, parent, line)
+        ClonableIntArray.__init__(self, parent, line)
 
 
     def check(self):

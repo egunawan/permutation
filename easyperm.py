@@ -69,6 +69,22 @@ class EasyPerm(SageObject):
                 cycles.append(tuple(cycle))
         return cycles
 
+    def is_derangement(self):
+    """
+    A fixed point of a permutation p is an element i such that p(i)=i.
+    A derangement is a permutation that has no fixed points.
+    Define a function called is_derangement that
+    returns True if p is a derangement and returns False otherwise.
+
+        EXAMPLES::
+
+            sage: EasyPerm([2,1,4,3]).is_derangement()
+            True
+            sage: EasyPerm([2,1,3,4]).is_derangement()
+            False
+    """
+        return 'exercise'
+
 ############ BEGIN TESTS ##############
 
 def test_EasyPerm(n=5):
