@@ -5,7 +5,7 @@ from sage.structure.element import Element
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.structure.list_clone import ClonableArray
 
-class myobj(ClonableArray):
+class MyPerm(ClonableArray):
     """ A permutation is
     """
     __metaclass__ = InheritComparisonClasscallMetaclass
@@ -17,20 +17,23 @@ class myobj(ClonableArray):
 
         EXAMPLES::
 
-            sage: myobj([1,2,3,4,5])
+            sage: MyPerm([1,2,3,4,5])
             [1, 2, 3, 4, 5]
         """
         for i in range(1,len(line)+1):
             if i not in line:
-                raise ValueError("The input must a one-line notation of a permutation on {}. The number {} does not appear in {}".format(len(line),i,line))
-        MOs = myobjs(len(line))
+                raise ValueError("The input must a one-line notation of a permutation on [{}]. The number {} does not appear in {}".format(len(line),i,line))
+        MOs = MyPerms(len(line))
         return MOs(line)
 
     def __init__(self, parent, line):
         """
         Initialize ``self``.
 
-        TESTS::
+        EXAMPLES::
+
+            sage: MyPerm([1,4,3,2])
+            [1, 4, 3, 2]
         """
         self._line = line
         self._n = parent._n
@@ -54,7 +57,7 @@ class myobj(ClonableArray):
         infront_line = infront._line
         for pos in range(0, self._n):
             new[pos]=self._line[infront_line[pos]-1]
-        return myobj(new)
+        return MyPerm(new)
 
     def to_matrix(self):
         r"""
@@ -63,14 +66,14 @@ class myobj(ClonableArray):
 
         EXAMPLES::
 
-            sage: myobj([1,2,3]).to_matrix()
+            sage: MyPerm([1,2,3]).to_matrix()
             [1 0 0]
             [0 1 0]
             [0 0 1]
 
         ::
 
-            sage: myobj([1,3,2]).to_matrix()
+            sage: MyPerm([1,3,2]).to_matrix()
             [1 0 0]
             [0 0 1]
             [0 1 0]
@@ -85,7 +88,7 @@ class myobj(ClonableArray):
         return matrix(n, entries, sparse = True)
 
 
-class myobjs(Parent,UniqueRepresentation):
+class MyPerms(Parent,UniqueRepresentation):
     """
     Permutations on [n]
     """
@@ -96,7 +99,7 @@ class myobjs(Parent,UniqueRepresentation):
     def __repr__(self):
         return 'Permutations on [{}]'.format(self._n)
 
-    Element = myobj
+    Element = MyPerm
 
     def __iter__(self):
         """
@@ -110,7 +113,7 @@ class myobjs(Parent,UniqueRepresentation):
     def n(self):
         return self._n
 
-class mytranspositions(myobjs):
+class mytranspositions(MyPerms):
     """
     Permutations on [n] which swaps exactly two numbers.
     NOT ordered in lexicographic order
@@ -150,19 +153,19 @@ def next_permutation(arr):
 
 
 ###################### start test ########################
-def test_myobjs(n=5):
-    M = myobjs(n)
+def test_MyPerms(n=5):
+    M = MyPerms(n)
     SageM = Permutations(n)
     if not len(M) == factorial(n):
         print 'len(M):',len(M)
         return False
-    if not myobj([5,4,3,2,1]).compose(myobj([5,4,3,2,1]))._line == myobj([1,2,3,4,5])._line:
-        print 'myobj([5,4,3,2,1]).compose(myobj([5,4,3,2,1]))._line:', myobj([5,4,3,2,1]).compose(myobj([5,4,3,2,1]))._line
+    if not MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line == MyPerm([1,2,3,4,5])._line:
+        print 'MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line:', MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line
         return False
     if not len(mytranspositions(n))==n*(n-1)/2:
         print 'len(mytranspositions(n))',len(mytranspositions(n))
         return False
-    if not myobj([5,4,1,2,3,6]).to_matrix() == Permutation([5,4,1,2,3,6]).to_matrix():
+    if not MyPerm([5,4,1,2,3,6]).to_matrix() == Permutation([5,4,1,2,3,6]).to_matrix():
         return False
     for P,SageP in zip(M,SageM): # compare with Sage Permutations class
         if not tuple(P)==tuple(SageP):
