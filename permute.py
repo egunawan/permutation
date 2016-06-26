@@ -108,19 +108,13 @@ class myobjs(Parent,UniqueRepresentation):
     Element = myobj
 
     def __iter__(self):
-       perm = range(1,self._n+1) # identity permutation
-       yield self.element_class(self,perm)
-       while next_permutation(perm):
-          yield self.element_class(self,perm)
-
-    def bak__iter__(self):
-        s=range(1,self._n+1)
-        list=s
-        used = [False] * len(list)
-        L= do_permute(list, [], used, 0)
-        for mm in L:
-            #yield mm
-            yield self.element_class(self,mm)
+        """
+        Ordered in Lexicographic order
+        """
+        perm = range(1,self._n+1) # identity permutation
+        yield self.element_class(self,perm)
+        while next_permutation(perm):
+           yield self.element_class(self,perm)
 
     def n(self):
         return self._n
@@ -128,7 +122,7 @@ class myobjs(Parent,UniqueRepresentation):
 class mytranspositions(myobjs):
     """
     Permutations on [n] which swaps exactly two numbers.
-    Not ordered by lexicographic order
+    NOT ordered in lexicographic order
     """
     def __iter__(self):
         line = range(1,self._n+1)
@@ -167,6 +161,7 @@ def next_permutation(arr):
 ###################### start test ########################
 def test_myobjs(n=5):
     M = myobjs(n)
+    SageM = Permutations(n)
     if not len(M) == factorial(n):
         print 'len(M):',len(M)
         return False
@@ -178,9 +173,20 @@ def test_myobjs(n=5):
         return False
     if not myobj([5,4,1,2,3,6]).to_matrix() == Permutation([5,4,1,2,3,6]).to_matrix():
         return False
+    for P,SageP in zip(M,SageM): # compare with Sage Permutations class
+        if not tuple(P)==tuple(SageP):
+            return False
     return True
 
 
+
+#    def bak__iter__(self):
+#        s=range(1,self._n+1)
+#        list=s
+#        used = [False] * len(list)
+#        L= do_permute(list, [], used, 0)
+#        for mm in L:
+#            yield self.element_class(self,mm)
 #def do_permute(list, out, used, level):
 #    """
 #    Used to produce all permutations
