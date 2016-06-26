@@ -35,8 +35,8 @@ class MyPerm(ClonableArray):
             sage: MyPerm([1,4,3,2])
             [1, 4, 3, 2]
         """
-        self._line = line
-        self._n = parent._n
+        #self._line = line
+        #self._n = parent._n
         ClonableArray.__init__(self, parent, line)
 
 
@@ -53,10 +53,9 @@ class MyPerm(ClonableArray):
         """
         infront is applied, then self
         """
-        new = [-1]*self._n
-        infront_line = infront._line
-        for pos in range(0, self._n):
-            new[pos]=self._line[infront_line[pos]-1]
+        new = [-1]*len(self)
+        for pos in range(0, len(self)):
+            new[pos]=self[infront[pos]-1]
         return MyPerm(new)
 
     def to_matrix(self):
@@ -159,8 +158,8 @@ def test_MyPerms(n=5):
     if not len(M) == factorial(n):
         print 'len(M):',len(M)
         return False
-    if not MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line == MyPerm([1,2,3,4,5])._line:
-        print 'MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line:', MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line
+    if not MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1])) == MyPerm([1,2,3,4,5]):
+        print 'MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line:', MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))
         return False
     if not len(MyTranspositions(n))==n*(n-1)/2:
         print 'len(MyTranspositions(n))',len(MyTranspositions(n))
