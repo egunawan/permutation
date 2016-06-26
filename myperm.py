@@ -46,9 +46,6 @@ class MyPerm(ClonableArray):
         if self not in self.parent():
             raise ValueError("invalid permutation")
 
-    def n(self):
-        return self._n
-
     def compose(self,infront):
         """
         infront is applied, then self
@@ -158,8 +155,12 @@ def test_MyPerms(n=5):
     if not len(M) == factorial(n):
         print 'len(M):',len(M)
         return False
+    if not M(range(1,n+1))==MyPerm(range(1,n+1)):
+        return False
     if not MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1])) == MyPerm([1,2,3,4,5]):
         print 'MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line:', MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))
+        return False
+    if not len(MyPerm(range(1,n+1)))==n:
         return False
     if not len(MyTranspositions(n))==n*(n-1)/2:
         print 'len(MyTranspositions(n))',len(MyTranspositions(n))
