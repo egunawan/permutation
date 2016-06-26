@@ -113,7 +113,7 @@ class MyPerms(Parent,UniqueRepresentation):
     def n(self):
         return self._n
 
-class mytranspositions(MyPerms):
+class MyTranspositions(MyPerms):
     """
     Permutations on [n] which swaps exactly two numbers.
     NOT ordered in lexicographic order
@@ -162,8 +162,8 @@ def test_MyPerms(n=5):
     if not MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line == MyPerm([1,2,3,4,5])._line:
         print 'MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line:', MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line
         return False
-    if not len(mytranspositions(n))==n*(n-1)/2:
-        print 'len(mytranspositions(n))',len(mytranspositions(n))
+    if not len(MyTranspositions(n))==n*(n-1)/2:
+        print 'len(MyTranspositions(n))',len(MyTranspositions(n))
         return False
     if not MyPerm([5,4,1,2,3,6]).to_matrix() == Permutation([5,4,1,2,3,6]).to_matrix():
         return False
