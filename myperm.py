@@ -1,7 +1,7 @@
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.structure.parent import Parent
-from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.structure.element import Element
+from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.structure.list_clone import ClonableArray
 
@@ -171,28 +171,3 @@ def test_MyPerms(n=5):
         if not tuple(P)==tuple(SageP):
             return False
     return True
-
-
-
-#    def bak__iter__(self):
-#        s=range(1,self._n+1)
-#        list=s
-#        used = [False] * len(list)
-#        L= do_permute(list, [], used, 0)
-#        for mm in L:
-#            yield self.element_class(self,mm)
-#def do_permute(list, out, used, level):
-#    """
-#    Used to produce all permutations
-#    """
-#    if len(list) == level:#
-#		yield out
-#    else:
-#        for i in range(0, len(list)):
-#            if used[i]:
-#                continue
-#            used[i] = True
-#            for perm in do_permute(list, out + [list[i]], used, level + 1):
-#                #print 'perm:',perm
-#                yield perm
-#            used[i] = False
