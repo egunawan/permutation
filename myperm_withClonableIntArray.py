@@ -1,7 +1,3 @@
-#from sage.structure.unique_representation import UniqueRepresentation
-#from sage.structure.parent import Parent
-#from sage.structure.element import Element
-#from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.structure.list_clone import ClonableIntArray
 
 class MyPerm(ClonableIntArray):
