@@ -28,7 +28,7 @@ class EasyPerm(SageObject):
                 D.append(pos+1)
         return D
 
-    def number_of_desecents(self):
+    def number_of_descents(self):
         """
         return the number of descents of ``self``.
 
