@@ -1,9 +1,8 @@
 from sage.structure.list_clone import ClonableIntArray
 
 class MyPerm(ClonableIntArray):
-    """ A permutation is
+    """ A permutation on ``parent._n``
     """
-
     def __init__(self, parent, line):
         """
         Initialize ``self``.
@@ -13,10 +12,7 @@ class MyPerm(ClonableIntArray):
             sage: MyPerm([1,4,3,2])
             [1, 4, 3, 2]
         """
-        #self._line = line
-        #self._n = parent._n
         ClonableIntArray.__init__(self, parent, line)
-
 
     def check(self):
         """
@@ -52,8 +48,6 @@ class MyPerm(ClonableIntArray):
             [1 0 0]
             [0 0 1]
             [0 1 0]
-
-
         """
         p = self[:]
         n = len(p)
@@ -65,7 +59,7 @@ class MyPerm(ClonableIntArray):
 
 class MyPerms(Parent,UniqueRepresentation):
     """
-    Permutations on [n]
+    Collection of permutations on [n]
     """
     def __init__(self,n):
         self._n=n
