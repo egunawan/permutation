@@ -1,10 +1,16 @@
+====================  Tutorial Links =======================
+Sage Tutorial: Objects and Classes in Python and Sage
 http://doc.sagemath.org/html/en/thematic_tutorials/tutorial-objects-and-classes.html
 
+Python’s “magic methods”:
 http://www.rafekettler.com/magicmethods.html
 
+==================== Other Info =======================
+
+Command for installing dot2tex (to view latex/tikz file in PDF)
+./sage -i dot2tex
+
+How to do SageMath Development on SageMathCloud:
 https://github.com/sagemathinc/smc/wiki/SageMath-Development-on-SageMathCloud
 
 
-./sage -i dot2tex
-
-(above is to use the command view)
