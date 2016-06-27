@@ -1,0 +1,19 @@
+As the previous speaker mentioned, 
+* Programming in Sage is useful: 
+(1) finding/disproving conjectures, 
+(2) creating nice latex/tikz figures quickly (e.g. drawing poset).
+* Benefits for contributing to Sage: 
+(1) you don’t lose your code 
+(2) It enables others to build on your work.
+
+1. Create a class for an object for your personal use
+- example: permutation on [n]
+2. Create a parent class for your object.
+(When contributing a new combinatorial object to Sage, we follow this structure)
+- example: 
+.. parent class: collection of all permutations on [n]
+.. element class: a permutation on [n]
+- example:
+.. parent class: collection of all noncrossing partitions of [n]
+.. element class: a noncrossing partition of [n]
+
