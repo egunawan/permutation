@@ -1,30 +1,12 @@
-from sage.structure.unique_representation import UniqueRepresentation
-from sage.structure.parent import Parent
-from sage.structure.element import Element
-from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
-from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
+#from sage.structure.unique_representation import UniqueRepresentation
+#from sage.structure.parent import Parent
+#from sage.structure.element import Element
+#from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.structure.list_clone import ClonableIntArray
 
 class MyPerm(ClonableIntArray):
     """ A permutation is
     """
-    __metaclass__ = InheritComparisonClasscallMetaclass
-
-    @staticmethod
-    def __classcall_private__(cls, line):
-        """
-        Create a permutation with input the one-line notation
-
-        EXAMPLES::
-
-            sage: MyPerm([1,2,3,4,5])
-            [1, 2, 3, 4, 5]
-        """
-        for i in range(1,len(line)+1):
-            if i not in line:
-                raise ValueError("The input must a one-line notation of a permutation on [{}]. The number {} does not appear in {}".format(len(line),i,line))
-        MOs = MyPerms(len(line))
-        return MOs(line)
 
     def __init__(self, parent, line):
         """
@@ -50,10 +32,11 @@ class MyPerm(ClonableIntArray):
         """
         infront is applied, then self
         """
+        M = MyPerms(len(self))
         new = [-1]*len(self)
         for pos in range(0, len(self)):
             new[pos]=self[infront[pos]-1]
-        return MyPerm(new)
+        return M(new)
 
     def to_matrix(self):
         r"""
@@ -152,20 +135,23 @@ def next_permutation(arr):
 def test_MyPerms(n=5):
     M = MyPerms(n)
     SageM = Permutations(n)
+    sage_m = SageM.random_element()
+    m = M(sage_m)
     if not len(M) == factorial(n):
         print 'len(M):',len(M)
         return False
-    if not M(range(1,n+1))==MyPerm(range(1,n+1)):
+    if not list(m)==list(sage_m):
+        print 'm== sage_m'
         return False
-    if not MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1])) == MyPerm([1,2,3,4,5]):
+    if not M(range(1,n+1)).compose(m) == M(m):
         print 'MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))._line:', MyPerm([5,4,3,2,1]).compose(MyPerm([5,4,3,2,1]))
         return False
-    if not len(MyPerm(range(1,n+1)))==n:
+    if not len(m)==n:
         return False
     if not len(MyTranspositions(n))==n*(n-1)/2:
         print 'len(MyTranspositions(n))',len(MyTranspositions(n))
         return False
-    if not MyPerm([5,4,1,2,3,6]).to_matrix() == Permutation([5,4,1,2,3,6]).to_matrix():
+    if not M([5,4,1,2,3,6]).to_matrix() == Permutation([5,4,1,2,3,6]).to_matrix():
         return False
     for P,SageP in zip(M,SageM): # compare with Sage Permutations class
         if not tuple(P)==tuple(SageP):

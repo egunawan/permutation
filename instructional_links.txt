@@ -2,6 +2,8 @@ http://doc.sagemath.org/html/en/thematic_tutorials/tutorial-objects-and-classes.
 
 http://www.rafekettler.com/magicmethods.html
 
+https://github.com/sagemathinc/smc/wiki/SageMath-Development-on-SageMathCloud
+
 
 ./sage -i dot2tex
 

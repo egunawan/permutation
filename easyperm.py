@@ -26,6 +26,17 @@ class EasyPerm(SageObject):
                 D.append(pos+1)
         return D
 
+    def number_of_desecents(self):
+        """
+        return the number of descents of ``self``.
+
+        EXAMPLES::
+
+            sage: EasyPerm([2,1,4,3]).number_of_descents()
+            2
+        """
+        return 'exercise for audience'
+
     def to_cycles(self, singletons=True):
         """
         Return the permutation ``self`` as a list of disjoint cycles.
@@ -70,20 +81,20 @@ class EasyPerm(SageObject):
         return cycles
 
     def is_derangement(self):
-    """
-    A fixed point of a permutation p is an element i such that p(i)=i.
-    A derangement is a permutation that has no fixed points.
-    Define a function called is_derangement that
-    returns True if p is a derangement and returns False otherwise.
+        """
+        A fixed point of a permutation p is an element i such that p(i)=i.
+        A derangement is a permutation that has no fixed points.
+        Define a function called is_derangement that
+        returns True if p is a derangement and returns False otherwise.
 
-        EXAMPLES::
+            EXAMPLES::
 
-            sage: EasyPerm([2,1,4,3]).is_derangement()
-            True
-            sage: EasyPerm([2,1,3,4]).is_derangement()
-            False
-    """
-        return 'exercise'
+                sage: EasyPerm([2,1,4,3]).is_derangement()
+                True
+                sage: EasyPerm([2,1,3,4]).is_derangement()
+                False
+        """
+        return 'exercise for audience'
 
 ############ BEGIN TESTS ##############
 
