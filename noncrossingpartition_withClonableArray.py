@@ -2,14 +2,15 @@ from sage.structure.list_clone import ClonableArray
 
 class NoncrossingPartition(ClonableArray):
     def __init__(self, parent, blocks):
-        #self._blocks = blocks
         self._number_of_blocks = len(blocks)
         self._n = parent._n
         if not SetPartitions(self._n)(blocks).is_noncrossing():
             raise ValueError("{} is not noncrossing".format(blocks))
         ClonableArray.__init__(self, parent,blocks)
     def _latex_(self):
-        return self.to_permutation()
+        return latex(self.to_permutation())
+    def __repr__(self):
+        return str(self.to_permutation())
 
     def check(self):
         """
@@ -25,6 +26,19 @@ class NoncrossingPartition(ClonableArray):
         perm = sp.to_permutation().to_cycles()
         return perm
 
+    def arcs(self):
+        """
+        Return the linear representation of ``self``
+
+        EXAMPLES::
+
+            sage: N=NoncrossingPartitions(5)
+            sage: ncp=N([[1,2,3,4],[5]])
+            sage: ncp.arcs()
+            [(1, 2), (2, 3), (3, 4)]
+        """
+        return SetPartitions(self._n)(self).arcs()
+
 class NoncrossingPartitions(UniqueRepresentation,Parent):
     def __init__(self,n):
         self._n = n
@@ -38,6 +52,13 @@ class NoncrossingPartitions(UniqueRepresentation,Parent):
             yield self.element_class(self,NCP)
     Element = NoncrossingPartition
 
+    def create_chain(self):
+        rels = []
+        for pos in range(len(self)-1):
+            rels.append([str(self[pos].to_permutation()),\
+            str(self[pos+1].to_permutation())])
+        return Poset([[],rels])
+
 
 ####### starts tests #########
 def test_noncrossingpartition(n=4):
@@ -48,6 +69,11 @@ def test_noncrossingpartition(n=4):
     for ncp in my_NCPs:
         if not sage_S(ncp).is_noncrossing():
             return False
+        if not sage_S(ncp).arcs() == ncp.arcs():
+            return False
+    C = my_NCPs.create_chain()
+    if not C.is_chain():
+        return False
     return True
 
 
