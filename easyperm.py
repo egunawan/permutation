@@ -18,7 +18,9 @@ class EasyPerm(SageObject):
         return EasyPerm(new)
     def descents(self):
         """
-        return a list with descents positions (where possible positions are 1,2, ..., n-1)
+        Return a list with descents positions (where possible positions
+        are 1,2, ..., n-1). A position k = 1,2, ..., n-1 is called
+        a descent of a permutation p if p(k+1)<p(k).
         """
         D = []
         for pos in range(0,self._n-1):
