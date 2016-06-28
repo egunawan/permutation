@@ -2,9 +2,7 @@ from sage.structure.list_clone import ClonableArray
 
 class NoncrossingPartition(ClonableArray):
     def __init__(self, parent, blocks):
-        self._number_of_blocks = len(blocks)
-        self._n = parent._n
-        if not SetPartitions(self._n)(blocks).is_noncrossing():
+        if not SetPartitions(len(blocks))(blocks).is_noncrossing():
             raise ValueError("{} is not noncrossing".format(blocks))
         ClonableArray.__init__(self, parent,blocks)
     def _latex_(self):
@@ -22,7 +20,8 @@ class NoncrossingPartition(ClonableArray):
         """
         Return the permutation corresponding to ``self`` in cycle notation
         """
-        sp = SetPartitions(self._n)(self)
+        n = len(self)
+        sp = SetPartitions(n)(self)
         perm = sp.to_permutation().to_cycles()
         return perm
 
@@ -37,7 +36,8 @@ class NoncrossingPartition(ClonableArray):
             sage: ncp.arcs()
             [(1, 2), (2, 3), (3, 4)]
         """
-        return SetPartitions(self._n)(self).arcs()
+        n = len(self)
+        return SetPartitions(n)(self).arcs()
 
 class NoncrossingPartitions(UniqueRepresentation,Parent):
     def __init__(self,n):
