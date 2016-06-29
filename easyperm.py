@@ -96,7 +96,10 @@ class EasyPerm(SageObject):
                 sage: EasyPerm([2,1,3,4]).is_derangement()
                 False
         """
-        print 'this should return whether self is a derangement'
+        for pos in range(0,self._n-1):
+            if self._line[pos]==pos+1:
+                return False
+        return True
 
 ############ BEGIN TESTS ##############
 
@@ -110,6 +113,10 @@ def test_EasyPerm(n=5):
     if not len(EasyPerm(m).descents()) == len(m.descents()): # because Sage descents start at 0
         return False
     if not EasyPerm(m).number_of_descents() == m.number_of_descents():
+        return False
+    if EasyPerm(m).is_derangement() and len(m.fixed_points())>0:
+        return False
+    if (not EasyPerm(m).is_derangement()) and len(m.fixed_points())==0:
         return False
     return True
 

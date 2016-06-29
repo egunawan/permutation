@@ -1,3 +1,7 @@
+"""
+Bare minimum classes NoncrossingPartitions and NoncrossingPartition
+"""
+
 from sage.structure.list_clone import ClonableArray
 
 class NoncrossingPartition(ClonableArray):
