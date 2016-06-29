@@ -1,3 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>SageMathCell</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function () {
+    // Make the div with id 'mycell' a Sage cell
+    sagecell.makeSagecell({inputLocation:  '#mycell',
+                           template:       sagecell.templates.minimal,
+                           evalButtonText: 'Activate'});
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+                           evalButtonText: 'Evaluate'});
+    });
+    </script>
+  </head>
+  <body>
+  <h1>Embedded Sage Cells</h1>
+
+
+<h2>A very simple class for permutation, with no methods</h2>
+You may change the code below before you click “Evaluate”.
+    <div class="compute"><script type="text/x-sage">
+class EasyPerm(object):
+    def __init__(self,line):
+        self._line = line
+        self._n = len(line)
+    def __repr__(self):
+        return 'My Permutation with one-line notation {}'.format(self._line)
+
+print EasyPerm([2,1,4,3])
+        </script></div>
+
+<h2>A simple class for permutation, with a few more methods</h2>
+You may change the code below before you click “Evaluate”.
+    <div class="compute"><script type="text/x-sage">
 class EasyPerm(object):
     def __init__(self,line):
         self._line = line
@@ -126,3 +164,6 @@ p = EasyPerm([2,1,4,3,5])
 print 'The cycle notation of {} is'.format(p), EasyPerm([2,1,4,3]).to_cycles()
 print 'The descent positions of {} are'. format(p), EasyPerm([2,1,4,3]).descents()
 print 'Is {} a derangement? '.format(p), p.is_derangement()
+</script></div>
+  </body>
+</html>
