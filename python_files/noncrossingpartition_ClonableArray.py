@@ -57,7 +57,6 @@ class NoncrossingPartitions(UniqueRepresentation,Parent):
             str(self[pos+1].to_permutation())])
         return Poset([[],rels])
 
-
 ####### starts tests #########
 def test_noncrossingpartition(n=4):
     sage_S=SetPartitions(n)

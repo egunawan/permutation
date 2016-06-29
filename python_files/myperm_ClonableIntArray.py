@@ -119,8 +119,6 @@ def next_permutation(arr):
     arr[i : ] = arr[len(arr) - 1 : i - 1 : -1]
     return True
 
-
-
 ###################### start test ########################
 def test_MyPerms(n=5):
     M = MyPerms(n)
@@ -147,3 +145,4 @@ def test_MyPerms(n=5):
         if not tuple(P)==tuple(SageP):
             return False
     return True
+

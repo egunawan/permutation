@@ -39,3 +39,7 @@ def test_noncrossingpartition(n=4):
         if not sage_S(ncp).is_noncrossing():
             return False
     return True
+
+N = NoncrossingPartitions(4)
+for ncp in N:
+    print ncp
