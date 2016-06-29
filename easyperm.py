@@ -37,7 +37,7 @@ class EasyPerm(SageObject):
             sage: EasyPerm([2,1,4,3]).number_of_descents()
             2
         """
-        return 'exercise for audience'
+        return len(self.descents())
 
     def to_cycles(self, singletons=True):
         """
@@ -96,7 +96,7 @@ class EasyPerm(SageObject):
                 sage: EasyPerm([2,1,3,4]).is_derangement()
                 False
         """
-        return 'exercise for audience'
+        print 'this should return whether self is a derangement'
 
 ############ BEGIN TESTS ##############
 
@@ -107,7 +107,9 @@ def test_EasyPerm(n=5):
         return False
     if not EasyPerm(m).to_cycles(singletons=False) == m.to_cycles(singletons=False):
         return False
-    if not EasyPerm(m).descents() == m.descents(from_zero=False):
+    if not len(EasyPerm(m).descents()) == len(m.descents()): # because Sage descents start at 0
+        return False
+    if not EasyPerm(m).number_of_descents() == m.number_of_descents():
         return False
     return True
 
