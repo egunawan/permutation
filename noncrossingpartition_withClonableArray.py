@@ -74,5 +74,3 @@ def test_noncrossingpartition(n=4):
     if not C.is_chain():
         return False
     return True
-
-
