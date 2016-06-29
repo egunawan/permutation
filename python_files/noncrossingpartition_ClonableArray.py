@@ -72,3 +72,8 @@ def test_noncrossingpartition(n=4):
     if not C.is_chain():
         return False
     return True
+
+N=NoncrossingPartitions(3)
+show(N.create_chain())
+for ncp in N:
+    print ncp.arcs()
